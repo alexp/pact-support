@@ -31,7 +31,11 @@ module Pact
           if v.nil?
             k
           elsif v.is_a?(Array) #For cases where there are multiple instance of the same parameter
-            v.map { |x| "#{k}=#{escape(x)}"}.join('&')
+            if v.size > 1
+              v.map { |x| "#{k}[]=#{escape(x)}"}.join('&')
+            else
+              v.map { |x| "#{k}=#{escape(x)}"}.join('&')
+            end
           else
             "#{k}=#{escape(v)}"
           end

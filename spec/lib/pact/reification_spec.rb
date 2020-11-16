@@ -147,7 +147,7 @@ module Pact
       let(:query) { QueryHash.new( {param: 'hello', double: [Pact::Term.new(generate: "wonder", matcher: /\w+/), 'world'], simple: 'bye'})}
 
       it "returns the hash in the natural order, and fills in Terms appropriately" do
-        expect(subject).to eq("param=hello&double=wonder&double=world&simple=bye")
+        expect(subject).to eq("param=hello&double[]=wonder&double[]=world&simple=bye")
       end
     end
 
@@ -157,7 +157,7 @@ module Pact
       let(:query) { QueryHash.new(param: Pact.each_like("1", min: 2)) }
 
       it "turns the hash into a string with the right number of params" do
-        expect(subject).to eq("param=1&param=1")
+        expect(subject).to eq("param[]=1&param[]=1")
       end
     end
 
